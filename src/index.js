@@ -5,10 +5,19 @@ import { Provider } from 'react-redux';
 import store from 'redux-components/store';
 
 import Test from 'containers/Test';
+import Posts from 'containers/Posts';
+import Pages from 'containers/Pages';
+
+const RenderApp = () => (
+    <div>
+        <Posts />
+        <Pages />
+    </div>
+);
 
 const App = () => (
     <Provider store={store}>
-        <Test />
+        <RenderApp />
     </Provider>
 );
 

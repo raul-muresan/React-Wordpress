@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import postsActions from 'redux-components/actions/posts';
+import pagesActions from 'redux-components/actions/pages';
 
 class Test extends Component {
     componentDidMount() {
-
+        this.props.getPosts();
+        this.props.getPages();
     }
 
     render() {
-        const { posts, pages, clickSmth, clickGetPages } = this.props;
+        const { posts, pages } = this.props;
         posts && console.log(posts);
         pages && console.log(pages);
 
         return (
             <div>
-                <button onClick = {clickSmth}>
+                <button>
                     Get Posts
                 </button>
                 {
@@ -22,7 +25,7 @@ class Test extends Component {
                         Posts with id {posts.map(post => <span key={post.id}>{post.id}, </span>)} are ready
                     </div>
                 }
-                <button onClick = {clickGetPages}>
+                <button>
                     Get Pages
                 </button>
                 {
@@ -42,8 +45,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    clickSmth: () => dispatch({type: 'FETCH_POSTS'}),
-    clickGetPages: () => dispatch({type: 'FETCH_PAGES'})
+    getPosts: () => dispatch(postsActions.getPosts()),
+    getPages: () => dispatch(pagesActions.getPages())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Test);
